@@ -14,39 +14,11 @@
 \RequirePackage{emoji}
 
 \RequirePackage[record,index,section,nomain,style=mcolalttree,stylemods={mcols,bookindex}]{glossaries-extra}
-\newglossary*{abbreviation}{Abreviações}
-\newglossary*{authwork}{Autores e obras antigos}
+\newglossary*{abbreviation}{Abkürzungen}
+\newglossary*{authwork}{Autoren und Werke}
 \newglossary*{passagens}{Autores, obras e passagens citadas}
-\newglossary*{lang}{Línguas}
-\newglossary*{linguas}{Línguas}
-\newglossary*{gram}{Glosas}
-\newglossary*{acronym}{Acrônimos}
-
-\GlsXtrLoadResources[
-	src={gloss},
-	sort={pt-BR},
-	match={entrytype={abbreviation}},
-	type={same as category},
-	\selection%
-]
-\GlsXtrLoadResources[
-	src={acronyms},
-	sort={pt-BR},
-	type=acronym,
-	\selection%
-]
-% \GlsXtrLoadResources[
-% 	src={./authors},
-% 	sort={pt-BR},
-% 	type=authwork,
-% 	\selection%
-% ]
-\GlsXtrLoadResources[
-	src={./abbrev},
-	sort={pt-BR},
-	type=abbreviation,
-	\selection%
-]
+\newglossary*{linguas}{Sprachen}
+\newglossary*{linguascit}{Sprachen}
 
 
 \GlsXtrLoadResources[
@@ -85,7 +57,7 @@
 \GlsXtrLoadResources[
 	src={linguas},
 	set-widest,
-	type=linguas,
+	type=linguascit,
 	label-prefix={idx.},
 	dual-prefix={},
 	cs-label-prefix={},
@@ -93,7 +65,7 @@
 	dual-field,
 	sort={pt-BR},
 	sort-field={name},
-	dual-type={same as category},
+	dual-type={linguas},
 	dual-sort={pt-BR},
 	dual-sort-number-pad={2},
 	dual-sort-pad-plus={1},
