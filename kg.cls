@@ -4,8 +4,28 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions\relax
 
-\LoadClass[11]{memoir}
+\LoadClass[11pt,extrafontsizes]{memoir}
 \setcolsepandrule{5em}{0pt}
+
+% set \clubpenalty, etc. to distinctive values for use
+% in tracing page breaks. These values are chosen so that
+% no single penalty will absolutely prohibit a page break, but
+% certain combinations of two or more will.
+\clubpenalty=9996
+\widowpenalty=9999
+\brokenpenalty=4991
+% Reiterate the default value of \redisplaypenalty, for
+% completeness.
+% Set postdisplaypenalty to a fairly high value to discourage a
+% page break between a display and a widow line at the end of a
+% paragraph.
+\predisplaypenalty=10000
+\postdisplaypenalty=1549
+% And then \displaywidowpenalty should be at least as high as
+% \postdisplaypenalty, otherwise in a situation where two displays
+% are separated by two lines, TeX will prefer to break between the
+% two lines, rather than before the first line.
+\displaywidowpenalty=1602
 
 \setparaindent{0em}%
 \setbeforeparaskip{0.25em}%
@@ -26,6 +46,12 @@
 \TrackLangShowWarningsfalse%
 
 \RequirePackage[main=german, bidi=basic]{babel}
+\newfontfamily\cartafont{Goudy Old Style Regular.ttf}[
+	Extension=.ttf,
+	ItalicFont=Goudy Old Style Regular Italic,
+	BoldFont=Goudy Old Style Extra Bold,
+]
+
 \newfontfamily\secondarygreek{Gentium Plus}
 \newfontfamily\thirdiarygreek{IFAO-Grec-Unicode}
 \newfontfamily\quaternarygreek{Pecita}
@@ -172,7 +198,7 @@
 \renewcommand\printbookname{}
 \renewcommand{\booknamefont}{\LARGE\scshape}
 \renewcommand{\booknumfont}{\LARGE\scshape}
-\renewcommand{\booktitlefont}{\Huge\bfseries\scshape}
+\renewcommand{\booktitlefont}{\HUGE\bfseries\scshape}
 % Part -> Abschnitt
 \makeatletter
 \renewcommand{\@setuppart}{%
@@ -185,9 +211,9 @@
 	\beforepartskip}
 \makeatother
 \nopartblankpage%
-\renewcommand*{\beforepartskip}{}
+\renewcommand*{\beforepartskip}{\bigskip\bigskip}
 \renewcommand{\midpartskip}{\par}
-\renewcommand{\afterpartskip}{\bigskip}
+\renewcommand{\afterpartskip}{\bigskip\bigskip}
 \renewcommand{\partpageend}{%
 	\afterpartskip%
 }
@@ -206,15 +232,15 @@
 \newcommand\chap[1]{%
 	\chapter*[#1]{#1}%
 	\addcontentsline{toc}{chapter}{#1}}
-\renewcommand{\chaptitlefont}{\centering\Large\bfseries\scshape}
-\renewcommand{\chapnamefont}{\centering\large\scshape}
-\renewcommand{\chapnumfont}{\centering\large\scshape}
+\renewcommand{\chaptitlefont}{\centering\LARGE\bfseries\scshape}
+\renewcommand{\chapnamefont}{\centering\Large\scshape}
+\renewcommand{\chapnumfont}{\centering\Large\scshape}
 \renewcommand{\clearforchapter}{}
 \renewcommand{\afterchapternum}{\par\midchapskip}
 % \chapterstyle{hangnum}
-\setlength{\beforechapskip}{2em}
-\setlength{\afterchapskip}{1em}
-\renewcommand{\afterchaptertitle}{\par\vskip \afterchapskip}
+\setlength{\beforechapskip}{2\bigskipamount}
+\setlength{\afterchapskip}{\bigskipamount}
+\renewcommand{\afterchaptertitle}{\par\vskip \afterchapskip\bigskip}
 \renewcommand\printchapternum{%
 	\par\chapnamefont\enspace%
 	\ifanappendix%
@@ -259,7 +285,6 @@
 	\begin{adjustwidth}{14em}{1.21em}
 		\begin{flushleft}
 			\small
-			\textbf{Colofão}\par
 			Esse documento foi diagramado usando o sistema de diagramação
 			\href{https://lualatex.org}{Lua\TeX} mantido por Manuel Pégourié-Gonnard.\\
 			As fontes utilizadas foram: {Gentium Book Plus (texto latino)};
