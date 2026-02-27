@@ -21,8 +21,6 @@
 \newfontfamily\thirdiarygreek{IFAO-Grec-Unicode}
 \newfontfamily\quaternarygreek{Pecita}
 \newfontfamily\epichoricfont{Brill-Epichoric}[Scale=1.2]
-\newcommand{\fleurl}{{\fleurfont{}}}
-\newcommand{\fleurr}{{\fleurfont{}}}
 \newcommand{\epigraphic}[1]{{\epichoricfont{}#1}}
 \defaultfontfeatures{Renderer=Harfbuzz}
 
@@ -33,10 +31,9 @@
 %
 \babelfont[english]{rm}[Script=Latin]{Gentium Book Plus}
 \babelfont[english]{sf}{Noto Sans}
-\babelfont[english]{tt}[Scale=0.8]{Mononoki Nerd Font}
+\babelfont[english]{tt}[Scale=0.85]{Mononoki Nerd Font}
 
-\babelprovide[import, onchar=ids fonts letters]{ancientgreek}
-\babelfont[ancientgreek]{rm}[BoldFont=Gentium Book Plus Bold]{Brill}
+\babelprovide[import]{ancientgreek}
 \babeltags{grc = ancientgreek}
 
 \babelprovide[import, onchar=ids fonts letters]{russian}
@@ -46,8 +43,8 @@
 \babelfont[hebrew]{rm}[Scale=0.8]{Ezra SIL}
 
 \babelprovide[]{ipa}
-\babelfont[ipa]{rm}{Gentium Plus}
-\babeltags{ipa = ipa}
+\babelfont[ipa]{rm}[Scale=0.8]{Noto Sans Bold}
+\newcommand{\ipa}[1]{\foreignlanguage{ipa}{#1}}
 
 \babelprovide[]{syntax}
 \babelfont[syntax]{rm}[Scale=0.85]{Noto Sans}
@@ -83,12 +80,43 @@
 	filecolor=green,  % color of file links
 	urlcolor=green,
 }
-\renewcommand{\passagem}[1]{\ifglshasparent{\glsentryparent{idx.#1}}{\glsxtrusefield{\glsentryparent{\glsentryparent{idx.#1}}}{useri}, }{}\glsxtrusefield{\glsentryparent{idx.#1}}{useri}, \gls{idx.#1}\ifglshasfield{useri}{idx.#1}{ =~\hyperref[corp:#1]{C\glsentryuseri{idx.#1}}}{}}
-\newcommand{\passagemb}[1]{\ifglshasparent{\glsentryparent{idx.#1}}{\glsxtrusefield{\glsentryparent{\glsentryparent{idx.#1}}}{userii},
-  }{}\glsxtrusefield{\glsentryparent{idx.#1}}{userii}, \gls{idx.#1}\ifglshasfield{useri}{idx.#1}{ =~\hyperref[corp:#1]{C\glsentryuseri{idx.#1}}}{}}
-\newcommand{\authwork}[1]{\glsxtrusefield{\glsentryparent{#1}}{useri}, \glsxtrshort{#1}}
-\newcommand{\passagemc}[1]{{\glsxtrusefield{\glsentryparent{\glsentryparent{idx.#1}}}{userii}
-(\glsxtrusefield{\glsentryparent{idx.#1}}{userii}, \gls{idx.#1})}}
+
+% (Auth.,) Wo. Passage
+\renewcommand{\passagem}[1]{\glslink{idx.#1}{\ifglshasparent{\glsentryparent{idx.#1}}{\glsxtrusefield{\glsentryparent{\glsentryparent{idx.#1}}}{useri}, }{}\glsxtrusefield{\glsentryparent{idx.#1}}{useri}, \gls{idx.#1}}}
+
+% (Author,) Work, Passage
+\newcommand{\passagemb}[1]{\glslink{idx.#1}{\ifglshasparent{\glsentryparent{idx.#1}}{\glsxtrusefield{\glsentryparent{\glsentryparent{idx.#1}}}{userii},
+  }{}\glsxtrusefield{\glsentryparent{idx.#1}}{userii},
+\gls{idx.#1}}}
+
+% Auth, Work
+\newcommand{\authwork}[1]{\glslink{idx.#1}{\glsxtrusefield{\glsentryparent{#1}}{useri},
+\glsxtrshort{#1}}}
+
+% Author[decl] (Work, passage)
+\newcommand{\passagemc}[2]{\glslink{idx.#1}{{\glsxtrusefield{\glsentryparent{\glsentryparent{idx.#1}}}{userii}#2
+(\glsxtrusefield{\glsentryparent{idx.#1}}{userii}, \gls{idx.#1})}}}
+
+% Author[decl] (passage)
+\newcommand{\passagemd}[2]{{\glsxtrusefield{\glsentryparent{idx.#1}}{userii}#2
+(\gls{idx.#1})}}
+
+% Wo. Passage
+\newcommand{\passageme}[1]{\glslink{idx.#1}{\glsxtrusefield{\glsentryparent{idx.#1}}{useri}, \gls{idx.#1}}}
+
+% Auth. (W., passage)
+\newcommand{\passagemf}[1]{\glslink{idx.#1}{{\glsxtrusefield{\glsentryparent{\glsentryparent{idx.#1}}}{useri}
+(\glsxtrusefield{\glsentryparent{idx.#1}}{useri}, \gls{idx.#1})}}}
+
+% Author long
+\newcommand{\authorlong}[1]{\glsxtrlong{#1}}
+\newcommand{\authorlongdecl}[2]{\glslink{idx.#1}{\glsxtrlong{#1}#2}}
+
+% Lang long
+\newcommand{\Langlong}[1]{\glsxtrlong{#1}}
+\newcommand{\Langlongdecl}[2]{\glslink{idx.#1}{\glsxtrlong{#1}#2}}
+\newcommand{\langlong}[1]{{\glsxtrusefield{#1}{useriii}}}
+\newcommand{\langlongdecl}[2]{\glslink{idx.#1}{\glsxtrusefield{#1}{useriii}#2}}
 
 
 \setparaindent{0em}%
@@ -235,6 +263,7 @@
 	style=bookindex,
 	title={Index Locorum},
 ]
+\clearpage%
 \glsfindwidesttoplevelname%
 \printunsrtglossary[
 	type=linguascit,
