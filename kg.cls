@@ -81,11 +81,20 @@
 \RequirePackage{longtable}
 \RequirePackage{makecell}
 \RequirePackage{lipsum}
+\RequirePackage{paralist}
 
 \let\printindex\undefined
 \RequirePackage{bibliocaiera}
 \RequirePackage{xcolor}
 \definecolor{green}{RGB}{16, 87, 87} % rgb(16,87,87)
+
+% Tikz
+\RequirePackage{tikz} %for all basic options
+\RequirePackage{tikz-qtree} %for simple tree syntax
+\RequirePackage{tree-dvips}
+\usepgflibrary{arrows} %for arrow endings
+\usetikzlibrary{positioning,shapes.multipart} %for structured nodes
+\usetikzlibrary{tikzmark}
 
 \RequirePackage[pdfusetitle]{hyperref}
 \hypersetup{%
@@ -232,6 +241,12 @@
 \setparahook{\setsecnumformat{\csname the##1\endcsname.\space}}
 \newcommand{\pararef}[2]{\hyperref[#2]{\ref*{#1}.\ref*{#2}}}
 \renewcommand{\thesubparagraph}{Anmerk. \arabic{subparagraph}}
+\setsubparaindent{0em}%
+\makeatletter
+\setbeforesubparaskip{0em}%
+\makeatother
+\setaftersubparaskip{0em}%
+\setsubparaheadstyle{\small\bfseries}
 
 % ToC
 \settocdepth{section}
