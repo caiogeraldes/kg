@@ -36,6 +36,7 @@
 \footmarkstyle{\textsuperscript{#1}\hspace{0.5em}}
 
 % Fontes, línguas, unicode
+\RequirePackage{ccicons}
 \RequirePackage{graphicx}
 \RequirePackage{csquotes}
 \RequirePackage{fontspec}
@@ -294,7 +295,11 @@
 			métrica) e \ipa{Noto Sans Bold} (complementos fonológicos).
 			\mbox{O texto está em tamanho 12/14,5pt}.\par
 
-			{\foreignlanguage[date]{brazilian}{\today}.}
+			{\foreignlanguage[date]{brazilian}{\today}.
+
+
+				\ccbyncsa%
+			}
 		\end{flushleft}
 	\end{adjustwidth}
 }
