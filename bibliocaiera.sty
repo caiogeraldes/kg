@@ -5,11 +5,7 @@
 \DeclareOption{all}{\renewcommand{\selection}{selection=all}}
 \ProcessOptions\relax
 
-\RequirePackage[backend=biber,
-	style=./biblatex/abnt-caio, language=brazil,
-	pretty, autolang=hyphen,
-	pretty, repeatfields, noslsn, natbib, extrayear, giveninits
-]{biblatex}
+\RequirePackage[backend=biber, style=authoryear]{biblatex}
 \addbibresource{./biblio.bib}
 \RequirePackage{emoji}
 
@@ -20,6 +16,11 @@
 \newglossary*{linguas}{Sprachen}
 \newglossary*{linguascit}{Sprachen}
 
+\GlsXtrLoadResources[
+	src={./abbrev},
+	type=abbreviation,
+	\selection%
+]
 
 \GlsXtrLoadResources[
 	src={authors,passagens},

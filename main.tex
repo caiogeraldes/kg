@@ -62,6 +62,11 @@
 
 \chapter*{Abkürzungen}
 
+\printunsrtglossary[
+	type=abbreviation,
+	nonumberlist=true,
+	style=index
+]
 \glsgetwidestsubname{1}
 \glsgetwidestsubname{2}
 \printunsrtglossary[
@@ -87,6 +92,9 @@
 \input{abschnitt/01_elementarlehre.tex}
 
 \backmatter%
+
+\cleardoublepage{}
+\printbibliography%
 
 \cleardoublepage{}
 \chap{Index}
