@@ -109,6 +109,7 @@
 \RequirePackage{makecell}
 \RequirePackage{lipsum}
 \RequirePackage{paralist}
+\setdefaultleftmargin{\parindent}{\parindent}{\parindent}{\parindent}{\parindent}{\parindent}
 
 \let\printindex\undefined
 \RequirePackage{bibliocaiera}
